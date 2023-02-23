@@ -1,3 +1,4 @@
+killall ngrok 
 killall docker
 systemctl stop nginx
 git pull origin main
