@@ -1,6 +1,6 @@
 killall docker
 systemctl stop nginx
-git pull origin master
+git pull origin main
 docker run -p 3000:3000 -d sicei:0.0.1
 systemctl start nginx
 ngrok http 3000 >> /dev/null &
