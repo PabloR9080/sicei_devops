@@ -1,0 +1,9 @@
+version: "1.0.0"
+services:
+  sicei_devops:
+    build: .
+    container_name: sicei
+    ports: 
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
