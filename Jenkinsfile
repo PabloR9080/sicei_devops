@@ -5,11 +5,11 @@ pipeline {
         GIT_BRANCH = 'main'
     }
     stages {
-        stage('Clone') {
-            steps {
-                sh "git clone $GIT_URL"
-            }
-        }
+        //stage('Clone') {
+        //    steps {
+        //        sh "git clone $GIT_URL"
+        //    }
+        //}
         stage('Build') {
             steps {
                 sh 'npm install'
