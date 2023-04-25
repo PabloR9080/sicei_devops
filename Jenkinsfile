@@ -1,12 +1,13 @@
 pipeline {
     agent {label "agent1"}
-    params {
-        string(name: 'GIT_URL', defaultValue: '', description: 'Git URL')
+    environment {
+        GIT_URL = 'https://github.com/PabloR9080/sicei_devops.git'
+        GIT_BRANCH = 'main'
     }
     stages {
         stage('Clone') {
             steps {
-                sh "git clone " ${params.GIT_URL}
+                sh "git clone $GIT_URL"
             }
         }
         stage('Build') {
