@@ -1,26 +1,28 @@
 pipeline {
     agent {label "agent1"}
-
+    params {
+        string(name: 'GIT_URL', defaultValue: '', description: 'Git URL')
+    }
     stages {
         stage('Clone') {
             steps {
-                echo 'Cloning..'
+                sh "git clone " ${params.GIT_URL}
             }
         }
         stage('Build') {
             steps {
-                echo 'Building..'
+                sh 'npm run build'
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+               sh 'npm run test'
             }
         }
         stage('Docker') {
             steps {
                 // docker build -t sicei-devops#Build:branch .
-                echo 'Building dockerfile!!ñ....'
+                sh 'docker build -t sicei-$GIT_BRANCH:1.0.0-$BUILD_NUMBER .'
             }
         }
         stage('Run Docker'){
@@ -28,7 +30,8 @@ pipeline {
                 // stop all containers 
                 // docker stop $(docker ps -a -q)
                 // docker run -d -p 8080:8080 sicei-devops#Build:branch
-                echo 'Running dockerfile!!ñ....'
+                sh 'docker stop $(docker ps -a -q)'
+                sh 'docker run -d -p 3000:3000 sicei-$GIT_BRANCH:1.0.0-$BUILD_NUMBER'
             }
         }
     }
