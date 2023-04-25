@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent 
 
     stages {
         stage('Clone') {
@@ -17,9 +17,18 @@ pipeline {
                 echo 'Testing..'
             }
         }
-        stage('Deploy') {
+        stage('Docker') {
             steps {
-                echo 'Deploying!!ñ....'
+                // docker build -t sicei-devops#Build:branch .
+                echo 'Building dockerfile!!ñ....'
+            }
+        }
+        stage('Run Docker'){
+            steps{
+                // stop all containers 
+                // docker stop $(docker ps -a -q)
+                // docker run -d -p 8080:8080 sicei-devops#Build:branch
+                echo 'Running dockerfile!!ñ....'
             }
         }
     }
